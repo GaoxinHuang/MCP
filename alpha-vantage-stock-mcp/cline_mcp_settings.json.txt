@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "yahoo-finance": {
+      "disabled": true,
+      "timeout": 60,
+      "command": "uvx",
+      "args": [
+        "mcp-yahoo-finance"
+      ],
+      "transportType": "stdio"
+    },
+    "stock-analysis-mcp": {
+      "disabled": false,
+      "timeout": 60,
+      "command": "node",
+      "args": [
+        "C:\\Users\\gx173\\Desktop\\MCP\\mcp\\alpha-vantage-stock-mcp\\dist\\index.js"
+      ],
+      "transportType": "stdio"
+    }
+  }
+}
