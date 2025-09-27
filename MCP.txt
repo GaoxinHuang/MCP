@@ -1,0 +1,71 @@
+一.	AI Agent 与 MCP 的连接方式
+1. STDIO（标准输入输出）传输
+特点：
+
+主要用于同一系统内的进程间通信 MCP Clients : Stdio vs SSE. STDIO (Standard Input/Output) Transport… | by V S Krishnan | Medium
+支持双向通信 MCP transport mechanisms: SSE and stdio · GitHub
+适用于本地部署的MCP服务器
+
+应用场景举例：
+Claude Desktop连接本地文件系统
+本地开发环境中的工具集成
+同一机器上运行的AI助手与数据库连接
+
+2. Streamable HTTP 传输
+特点：
+
+使用HTTP POST请求进行客户端到服务器的通信，并可选择使用服务器发送事件（SSE）流进行服务器到客户端的通信 Model Context ProtocolStainless
+被认为是现代标准 MCP Server Transports: STDIO, Streamable HTTP & SSE
+支持远程连接和网络通信
+
+应用场景举例：
+
+AI agent连接云端API服务
+跨网络的数据源访问
+企业级AI应用与远程服务集成
+
+3. HTTP + SSE（服务器发送事件）传输
+特点：
+
+使用HTTP+SSE作为传输机制 SSE vs Streamable HTTP: Why MCP Switched Transport Protocols
+主要用于遗留系统 MCP Server Transports: STDIO, Streamable HTTP & SSE
+支持实时数据流
+
+应用场景举例：
+
+实时数据监控系统
+股票价格或新闻流的实时更新
+聊天应用中的消息推送
+
+4. WebSocket 传输（正在开发）
+特点：
+
+启用MCP客户端和服务器之间的实时双向通信，支持网络中断时的会话持久性 SEP-1287: WebSocket Transport · Issue #1288 · modelcontextprotocol/modelcontextprotocol
+目前仍在开发阶段
+支持低延迟通信
+
+应用场景举例：
+
+实时协作工具
+游戏AI或交互式应用
+需要高频数据交换的场景
+
+5. 自定义传输实现
+特点：
+
+支持双向消息传递via JSON-RPC 2.0，可以挂接到服务器的运行方法中 What are MCP transports? | Speakeasy
+当性能要求、框架集成或安全需求特殊时使用 Custom MCP Transport Implementation - Stainless MCP Portal
+
+应用场景举例：
+
+高性能计算环境
+特殊安全要求的企业系统
+需要特殊加密的金融应用
+
+二.	主流和技术推荐
+1.	STDIO: 
+(1)	用 python, 因为MCP 官方用 Python. 而且现有主流 的 MCP 服务器都是大多都是python 实现
+(2)	 uvx生态系统成熟 和 PyPI发布STDIO工具更标准化
+
+2.	Streamable HTTP: 一次性返回 (TS)
+3.	HTTP + SSE: (TS)
